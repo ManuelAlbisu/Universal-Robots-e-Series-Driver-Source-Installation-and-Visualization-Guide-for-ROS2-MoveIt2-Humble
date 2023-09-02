@@ -4,13 +4,14 @@
 #+DESCRIPTION: A setup guide for visualizing Universal Robots e-Series robot's in MoveIt Humble.
 #+LANGUAGE: en
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+OPTIONS: num:nil tags:nil
 
 * Table of Contents                                            :TOC:noexport:
 - [[#resources][Resources]]
 - [[#installing-the-ur-e-series-driver][Installing the UR e-Series Driver]]
 - [[#visualizing-ur-e-series-robot-in-rviz][Visualizing UR e-Series Robot in RViz]]
 
-* Getting started
+* Getting started                                                       :TOC:
 This guide assumes that you have access to a Universal Robots e-Series robot and are using Ubuntu 22.04, ROS2 Humble, and MoveIt Humble.
 
 If you have not already installed [[https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html][ROS2 Humble]] and [[https://moveit.picknik.ai/humble/doc/tutorials/getting_started/getting_started.html][MoveIt Humble]], please do so before continuing. It can be easy to miss a step while following the ROS2 or MoveIt Humble installation guide. If you run into any errors while following this guide, make sure that ROS2 and MoveIt Humble were properly installed and don't forget to [[https://docs.ros.org/en/rolling/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#source-the-setup-files][source ROS2]]. 
