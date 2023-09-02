@@ -1,0 +1,62 @@
+#+TITLE: Universal Robots e-Series Driver Source Installation and Visualization Guide for ROS2/MoveIt2 Humble
+#+DATE: [2023-09-05 Tue 14:00]
+#+AUTHOR: Manuel Albisu & Santiago Cuartes
+#+DESCRIPTION: A setup guide for visualizing Universal Robots e-Series robot's in MoveIt Humble.
+#+LANGUAGE: en
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+
+This guide assumes that you have access to a Universal Robots e-Series robot and are using Ubuntu 22.04, ROS2 Humble, and MoveIt Humble.
+
+If you have not already installed [[https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html][ROS2 Humble]] and [[https://moveit.picknik.ai/humble/doc/tutorials/getting_started/getting_started.html][MoveIt Humble]], please do so before continuing. It can be easy to miss a step while following the ROS2 or MoveIt Humble installation guide. If you run into any errors while following this guide, make sure that ROS2 and MoveIt Humble were properly installed and don't forget to [[https://docs.ros.org/en/rolling/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#source-the-setup-files][source ROS2]]. 
+
+All of the commands have been tested during the creation of this guide to ensure that everything works as it should. Please direct any questions you may have to the [[https://discourse.ros.org/c/ng-ros/25][ROS2 forums]].
+
+* Resources                                                             :TOC:
+  * [[https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html][ROS2 Humble Ubuntu 22.04 installation guide]]
+  * [[https://moveit.picknik.ai/humble/doc/tutorials/getting_started/getting_started.html][MoveIt Humble Ubuntu 22.04 installation guide]] 
+  * [[https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver][Universal Robots ROS2 Driver]]
+
+* Installing the UR e-Series Driver                                     :TOC:
+Be sure to [[https://docs.ros.org/en/rolling/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#source-the-setup-files][source ROS2]] before building the driver.
+
+Make sure to have =colcon= and its extensions, as well as =vcs= installed:
+
+#+begin_src shell
+  sudo apt install python3-colcon-common-extensions python3-vcstool python3-rosdep
+#+end_src
+
+Then create a new ROS2 workspace for the driver:
+
+#+begin_src shell
+  mkdir -p ~/workspace/ros_ur_driver/src
+#+end_src
+
+Change directory into the root of your workspace and clone the relevant packages:
+
+#+begin_src shell
+  cd ~/workspace/ros_ur_driver/
+  git clone -b humble https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver.git src/Universal_Robots_ROS2_Driver
+#+end_src
+
+Install the dependencies required to build the driver:
+
+#+begin_src shell
+  vcs import src --skip-existing --input src/Universal_Robots_ROS2_Driver/Universal_Robots_ROS2_Driver.humble.repos
+  sudo rosdep init
+  rosdep update
+  rosdep install --ignore-src --from-paths src -y
+#+end_src
+
+Build and source the workspace:
+
+#+begin_src shell
+  colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+  source install/setup.bash
+#+end_src
+
+* Visualizing UR e-Series Robot in RViz                                 :TOC:
+
+#+begin_src shell
+  ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur5e robot_ip:=yyy.yyy.yyy.yyy launch_rviz:=true initial_joint_controller:=joint_trajectory_controller
+#+end_src
+
