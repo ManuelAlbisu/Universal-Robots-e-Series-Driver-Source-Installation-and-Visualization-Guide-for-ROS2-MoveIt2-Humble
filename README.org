@@ -7,6 +7,7 @@
 #+OPTIONS: num:nil tags:nil
 
 * Table of Contents                                            :TOC:noexport:
+- [[#getting-started][Getting started]]
 - [[#resources][Resources]]
 - [[#installing-the-ur-e-series-driver][Installing the UR e-Series Driver]]
 - [[#visualizing-ur-e-series-robot-in-rviz][Visualizing UR e-Series Robot in RViz]]
@@ -24,7 +25,11 @@ All of the commands have been tested during the creation of this guide to ensure
   * [[https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver][Universal Robots ROS2 Driver]]
 
 * Installing the UR e-Series Driver                                     :TOC:
-Be sure to [[https://docs.ros.org/en/rolling/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#source-the-setup-files][source ROS2]] before building the driver.
+Be sure to [[https://docs.ros.org/en/rolling/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#source-the-setup-files][source ROS2]] before building the driver:
+
+#+begin_src shell
+source /opt/ros/humble/setup.bash
+#+end_src
 
 Make sure to have =colcon= and its extensions, as well as =vcs= installed:
 
@@ -57,7 +62,7 @@ Install the dependencies required to build the driver:
 Build and source the workspace:
 
 #+begin_src shell
-  colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+  colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --allow-overriding control_msgs gripper_controllers joint_state_broadcaster joint_trajectory_controller
   source install/setup.bash
 #+end_src
 
