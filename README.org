@@ -69,6 +69,6 @@ Build and source the workspace:
 * Visualizing UR e-Series Robot in RViz                                 :TOC:
 
 #+begin_src shell
-  ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur5e robot_ip:=yyy.yyy.yyy.yyy launch_rviz:=true initial_joint_controller:=joint_trajectory_controller
+  ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur5e robot_ip:=yyy.yyy.yyy.yyy launch_rviz:=true
 #+end_src
 
